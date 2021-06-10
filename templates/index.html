@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ECS 171 Group 11 Project Demo</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- CSS -->
+  <link href="{{ url_for('static', path='style.css') }}" rel="stylesheet">
+</head>
+
+<body class="background-gradient">
+  <div class="container">
+    <div class="py-5 text-center">
+      <h2>ECS 171 Group 11 Project Demo</h2>
+      <p class="lead">Predict whether a certain customer will purchase a product!</p>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form class="text-center" action="/predict/" enctype="application/x-www-form-urlencoded" method="post">
+          <h5 class="mb-4 mt-4">Number of Pages Visited By Type</h5>
+          <div class="row text-center">
+            <div class="col-md-4 mb-3 form-group">
+              <label for="Administrative">Administrative Pages</label>
+              <input type="number" name="Administrative" class="form-control" id="Administrative" required>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+              <label for="Informational">Informational Pages</label>
+              <input type="number" name="Informational" class="form-control" id="Informational" required>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+              <label for="ProductRelated">Product Related Pages</label>
+              <input type="number" name="ProductRelated" class="form-control" id="ProductRelated" required>
+            </div>
+          </div>
+          <h5 class="mb-4 mt-4">Minutes Stayed on Page</h5>
+          <div class="row">
+            <div class="col-md-4 mb-3 form-group">
+              <label for="Administrative_Duration">Administrative Duration</label>
+              <input type="number" name="Administrative_Duration" class="form-control" id="Administrative_Duration" required>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+              <label for="Informational_Duration">Informational Duration</label>
+              <input type="number" name="Informational_Duration" class="form-control" id="Informational_Duration" required>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+              <label for="ProductRelated_Duration">Product Related Duration</label>
+              <input type="number" name="ProductRelated_Duration" class="form-control" id="ProductRelated_Duration" required>
+            </div>
+          </div>
+          <h5 class="mb-4 mt-4">Web Page Attributes</h5>
+          <div class="row">
+            <div class="col-md-4 mb-3 form-group">
+              <label for="BounceRates">Bounce Rate</label>
+              <h6>Percent users leaving page with no interaction</h6>
+              <input type="number" step="0.01" name="BounceRates" class="form-control" id="BounceRates", placeholder="0.0 - 1.0" required>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+              <label for="ExitRates">Exit Rate</label>
+              <h6>Percent users exiting site off this page</h6>
+              <input type="number" step="0.01" name="ExitRates" class="form-control" id="ExitRates", placeholder="0.0 - 1.0" required>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+              <label for="PageValues">Page Value</label>
+              <h6>Avg value of page before e-commerce transaction</h6>
+              <input type="number" step="0.01" name="PageValues" class="form-control" id="PageValues", placeholder="0.0 - 1.0" required>
+            </div>
+          </div>
+          <h5 class="mb-4 mt-4">Miscellaneous</h5>
+          <div class="row">
+            <div class="col-md-3 mb-3 form-group">
+              <label for="SpecialDay">Special Day?</label>
+              <select name="SpecialDay" class="form-control" id="SpecialDay">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 form-group">
+              <label for="'Weekend'">Weekend?</label>
+              <select name="Weekend" class="form-control" id="Weekend">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 form-group">
+              <label for="Month">Month</label>
+              <select name="Month" class="form-control" id="Month">
+                <option value="Month_Feb">February</option>
+                <option value="Month_Mar">March</option>
+                <option value="Month_May">May<y/option>
+                <option value="Month_June">June</option>
+                <option value="Month_Jul">July</option>
+                <option value="Month_Aug">August</option>
+                <option value="Month_Sep">September</option>
+                <option value="Month_Oct">October</option>
+                <option value="Month_Nov">November</option>
+                <option value="Month_Dec">December</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 form-group">
+              <label for="OperatingSystems">Operating System Used</label>
+              <select name="OperatingSystems" class="form-control" id="OperatingSystems">
+                <option value="OperatingSystems_1">1</option>
+                <option value="OperatingSystems_2">2</option>
+                <option value="OperatingSystems_3">3</option>
+                <option value="OperatingSystems_4">4</option>
+                <option value="OperatingSystems_5">5</option>
+                <option value="OperatingSystems_6">6</option>
+                <option value="OperatingSystems_7">7</option>
+                <option value="OperatingSystems_8">8</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 mb-3 form-group">
+              <label for="Browser">Browser Used</label>
+              <select name="Browser" class="form-control" id="Browser">
+                <option value="Browser_1">1</option>
+                <option value="Browser_2">2</option>
+                <option value="Browser_3">3</option>
+                <option value="Browser_4">4</option>
+                <option value="Browser_5">5</option>
+                <option value="Browser_6">6</option>
+                <option value="Browser_7">7</option>
+                <option value="Browser_8">8</option>
+                <option value="Browser_9">9</option>
+                <option value="Browser_10">10</option>
+                <option value="Browser_11">11</option>
+                <option value="Browser_12">12</option>
+                <option value="Browser_13">13</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 form-group">
+              <label for="Region">Region From</label>
+              <select name="Region" class="form-control" id="Region">
+                <option value="Region_1">1</option>
+                <option value="Region_2">2</option>
+                <option value="Region_3">3</option>
+                <option value="Region_4">4</option>
+                <option value="Region_5">5</option>
+                <option value="Region_6">6</option>
+                <option value="Region_7">7</option>
+                <option value="Region_8">8</option>
+                <option value="Region_9">9</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 form-group">
+              <label for="TrafficType">Traffic Type</label>
+              <select name="TrafficType" class="form-control" id="TrafficType">
+                <option value="TrafficType_1">1</option>
+                <option value="TrafficType_2">2</option>
+                <option value="TrafficType_3">3</option>
+                <option value="TrafficType_4">4</option>
+                <option value="TrafficType_5">5</option>
+                <option value="TrafficType_6">6</option>
+                <option value="TrafficType_7">7</option>
+                <option value="TrafficType_8">8</option>
+                <option value="TrafficType_9">9</option>
+                <option value="TrafficType_10">10</option>
+                <option value="TrafficType_11">11</option>
+                <option value="TrafficType_12">12</option>
+                <option value="TrafficType_13">13</option>
+                <option value="TrafficType_14">14</option>
+                <option value="TrafficType_15">15</option>
+                <option value="TrafficType_16">16</option>
+                <option value="TrafficType_17">17</option>
+                <option value="TrafficType_18">18</option>
+                <option value="TrafficType_19">19</option>
+                <option value="TrafficType_20">20</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 form-group">
+              <label for="VisitorType">Visitor Type</label>
+              <select name="VisitorType" class="form-control" id="VisitorType">
+                <option value="VisitorType_New_Visitor">New Visitor</option>
+                <option value="VisitorType_Returning_Visitor">Returning Visitor</option>
+                <option value="VisitorType_Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block mt-5" type="submit">Predict</button>
+        </form>
+      </div>
+    </div>
+    
+    <footer class="pt-5 text-muted text-center text-small">
+      <p class="text-white" class="mb-1">&copy; Fall 2020 ECS 171 Group 11</p>
+    </footer>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
